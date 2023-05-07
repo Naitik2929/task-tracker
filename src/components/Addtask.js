@@ -1,22 +1,21 @@
 import React from "react";
 import { useState } from "react";
 
-const Addtask = ({ onAdd }) => {
+const Addtask = ({ onAdd, setshowaddtask }) => {
   const [text, settext] = useState("");
   const [day, setday] = useState("");
-  const [rem, setrem] = useState(false);
+  const [reminder, setrem] = useState(false);
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!text) {
-      alert("Task can't be empty!")
-      return
+      alert("Task can't be empty!");
+      return;
     }
-    onAdd({ text, day, rem })
-    settext('')
-    setday('')
-    setrem(false)
-
-  }
+    onAdd({ text, day, reminder });
+    settext("");
+    setday("");
+    setshowaddtask(false);
+  };
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="form-control">
@@ -44,15 +43,14 @@ const Addtask = ({ onAdd }) => {
         <label>Set Reminder</label>
         <input
           type="checkbox"
-          checked={rem}
-          value={rem}
+          checked={reminder}
+          value={reminder}
           onChange={(e) => {
             setrem(e.currentTarget.checked);
           }}
         />
       </div>
-      <input type="submit" className="btn btn-block" value='Save Task' />
-
+      <input type="submit" className="btn btn-block" value="Save Task" />
     </form>
   );
 };
